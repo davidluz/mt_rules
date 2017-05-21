@@ -16,8 +16,17 @@ function MatchingGenerator(){
 function RandomGenerator(type, max){
 
 	if(type=="position"){
-		positionRandom = Math.floor(Math.random() * max + 1);
-		return (positionRandom);
+		    var numbers = [];
+    for(i=1; i<=max; i++){
+	numbers.push(i);
+	}	
+
+	function shuffle(o) {
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+    };
+
+    return (shuffle(numbers));
 	}
 
 	if(type="stimulusNoRepetion"){
@@ -39,7 +48,7 @@ function RandomGenerator(type, max){
 }
 
 // Gerador de Contingência - recebe os estímulos, qual o modelo e qual as regras de uma rodada específica
-function ContingencyGenerator(rules){
+function ContingencyGenerator(rules,stimulusNumbers,specificRangeInit,specificRangeEnd){
 
 //positions
 //a1 a2 a3
@@ -48,12 +57,42 @@ function ContingencyGenerator(rules){
 
 //Default - Randomizes the model and three comparisons
 if(rules=='default'){
-	var contingency =  [null,null,null,null,'model',null,'comparasion1','comparasion2','comparasion3'];
-	var temp = RandomGenerator('stimulusNoRepetion',3);
-    contingency[4] = temp[1] ; 
-	contingency[6] = temp[1] ; 
-	contingency[7] = temp[1] ; 
-    contingency[8] = temp[1] ;  
+	var contingency =  ['model','comparasion1','comparasion2','comparasion3'];
+	var stimulus = RandomGenerator('stimulusNoRepetion',stimulusNumbers);
+    var positions = RandomGenerator('position',3);
+    contingency[0] = stimulus[0];
+    contingency[positions[0]] = stimulus[0];
+    contingency[positions[1]] = stimulus[1];
+    contingency[positions[2]] = stimulus[2];
+}
+
+//Default - Only one comparasion is difference
+if(rules=='oneDiference'){
+	var contingency =  ['model','comparasion1','comparasion2','comparasion3'];
+	var stimulus = RandomGenerator('stimulusNoRepetion',stimulusNumbers);
+    var positions = RandomGenerator('position',3);
+    contingency[0] = stimulus[0];
+    contingency[positions[0]] = stimulus[0];
+    contingency[positions[1]] = stimulus[0];
+    contingency[positions[2]] = stimulus[2];
+}
+// Select on specific range - Modelo Mare
+if(rules=='specificRange'){
+	var contingency =  ['model','comparasion1','comparasion2','comparasion3'];
+	var stimulus =[];
+		for (i=0;  i<=stimulusNumbers; i++){
+		stimulus[i] = i+1;
+	}
+	console.log(stimulus);
+   	var stimulusCut = stimulus.slice(specificRangeInit,specificRangeEnd);
+   	console.log(stimulusCut);
+	var stimulusShuffle = shuffle(stimulusCut);
+	console.log(stimulusShuffle);
+    var positions = RandomGenerator('position',3);
+    contingency[0] = stimulusCut[0];
+    contingency[positions[0]] = stimulusCut[0];
+    contingency[positions[1]] = stimulusCut[1];
+    contingency[positions[2]] = stimulusCut[2];
 }
 
 return contingency;
