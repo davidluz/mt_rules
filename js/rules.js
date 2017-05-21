@@ -83,11 +83,11 @@ if(rules=='specificRange'){
 		for (i=0;  i<=stimulusNumbers; i++){
 		stimulus[i] = i+1;
 	}
-	console.log(stimulus);
+
    	var stimulusCut = stimulus.slice(specificRangeInit,specificRangeEnd);
-   	console.log(stimulusCut);
+   	
 	var stimulusShuffle = shuffle(stimulusCut);
-	console.log(stimulusShuffle);
+	
     var positions = RandomGenerator('position',3);
     contingency[0] = stimulusCut[0];
     contingency[positions[0]] = stimulusCut[0];

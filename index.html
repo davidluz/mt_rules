@@ -7,21 +7,42 @@
 <script src="js/rules.js"></script>
 <script src="js/phaser.min.js"></script>
 <script src="js/main.js"></script>
-<link rel="stylesheet" href="css/style.css">
+
 </head>
 
-<script src="js/phaser.min.js"></script>
 
 
-<body>
+<body cz-shortcut-listen="true">
 
-<div id="tela0" class="telas">
-	
+<div id="tela0">
+  <div class="jumbotron">
+      <div class="container">
+    <div class="row">
+   <div class="form-home">
+<h2>Digite o nome do participante:</h2><br>
+<input type="text" name="fname">
+
+<h2>Escolha o grupo:</h2><br>
+<select>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="8">9</option>
+</select><br><br>
+<button class="btn btn-primary btn-lg" id="iniciar-teste">Iniciar teste</button>
+
+	</div></div></div></div>
 </div>
 
     <div id="tela1" class="telas">
     <div class="jumbotron">
       <div class="container">
+
         <h1>Você vai realizar uma atividade em que poderá ganhar ponto a depender do seu desempenho.</h1>
 
         <div class="row spacer">
@@ -45,7 +66,53 @@
     </div>
 
     <div id="tela3" class="telas">
+      <div class="container">
       
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-11">
+          <h3>Pontos:0</h3>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+          <img id="model" src="imgs/f4c4.jpg" class="img-responsive" alt="Responsive image"> 
+        </div>
+      </div>
+
+      <div  id="acerto" class="alert alert-success hidden" role="alert">Você acertou a resposta.</div>
+      
+      <div  id="erro" class="alert alert-danger hidden" role="alert">Você não acertou a resposta. </div>
+
+
+      <div class="row spacer">
+      </div>  
+
+      <!-- id # foi gambi para fazer figura ficar clickavel-->
+      <div class="row">
+        <div class="col-xs-4">
+          <a href="#"> <img id="comp1" src="imgs/f4c4.jpg"  class="img-responsive"> </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#"> <img id="comp2" src="imgs/f3c3.jpg"  class="img-responsive"> </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#"> <img id="comp3" src="imgs/f3c4.jpg"  class="img-responsive"> </a>
+        </div>
+      </div>
+
+    
+    </div>
+    </div>
+   
+</div>
+
+
+<style></style>
+
+
+
     </div>
 
 
@@ -61,6 +128,6 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" href="css/style.css">
 
 </html>
