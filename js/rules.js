@@ -90,10 +90,12 @@ if(rules=='specificRange'){
 	
     var positions = RandomGenerator('position',3);
     contingency[0] = stimulusCut[0];
-    contingency[positions[0]] = stimulusCut[0];
+    contingency[positions[0]] = stimulusCut[0]; 
     contingency[positions[1]] = stimulusCut[1];
     contingency[positions[2]] = stimulusCut[2];
 }
+
+
 
 return contingency;
 
