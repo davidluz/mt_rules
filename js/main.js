@@ -82,8 +82,8 @@ if(valor.forma==5){
 }
 
 function agrupaCores(valor){
-  if(valor.cor==1){
-  grupoCores1.push(valor);
+if(valor.cor==1){
+ grupoCores1.push(valor);
 }
 if(valor.cor==2){
   grupoCores2.push(valor);
@@ -96,19 +96,62 @@ if(valor.cor==4){
 }
 }
 
+estimulos.forEach(agrupaFormas);
 estimulos.forEach(agrupaCores);
 
 function tentativa(){
-  console.log(grupoCores1[1]);
-   console.log(grupoCores1[2]);
-    console.log(grupoCores1[3]);
-
-// Lembrar de manter a lógica da contingencia - ja vem dada no objeto  
-contingency = ContingencyGenerator('specificRange',19);
+    // Lembrar de manter a lógica da contingencia - ja vem dada no objeto  
+    contingency = ContingencyGenerator('specificRange',19);
     var estimuloModelo = estimulos[contingency[0]];
-    var estimuloComparacao1 = estimulos[contingency[1]];
+    //Igual em forma e em cor, já garantido pelo gerador de contingências
+    var estimuloComparacao1 = estimulos[contingency[0]];
+
+
+    //Igual e forma ou cor
     var estimuloComparacao2 = estimulos[contingency[2]];
-    var estimuloComparacao3 = estimulos[contingency[3]];
+    var tempstring = eval('grupoFormas' + estimulos[contingency[0]].forma);
+    var tempstring2 = eval('grupoCores' + estimulos[contingency[0]].cor);
+    
+
+    var tempRandom1 = Math.floor(Math.random() *2)+1;
+    console.log(tempRandom1);
+    //igual em forma
+    if (tempRandom1==1){ 
+    var rand = tempstring[Math.floor(Math.random() * eval(tempstring).length)];
+    
+    while(rand.id==estimulos[contingency[0]].id){
+    rand = tempstring[Math.floor(Math.random() * eval(tempstring).length)];
+    }
+    var estimuloComparacao2 = rand;
+    }
+   
+   
+        
+   //Igual em cor
+    if (tempRandom1==2){
+         var rand = tempstring2[Math.floor(Math.random() * eval(tempstring2).length)];
+    
+    while(rand.id==estimulos[contingency[0]].id){
+    rand = tempstring[Math.floor(Math.random() * eval(tempstring).length)];
+    }
+    var estimuloComparacao2 = rand;
+      
+    }
+
+
+
+  
+    //Diferente em forma e cor
+     var estimuloComparacao3 = estimulos[contingency[3]];
+   
+    while (estimulos[contingency[0]].forma==estimuloComparacao3.forma||
+           estimulos[contingency[0]].cor==estimuloComparacao3.cor)
+       {
+        var lastTemp = Math.floor(Math.random() *18)+1;
+        estimuloComparacao3 = estimulos[lastTemp];
+        }
+        console.log(estimulos[contingency[0]].forma,estimulos[contingency[3]].forma);
+     
 
  
    // Regras específicas software Mare - encapsular depoisss - muito importante para evitar trabalhos futuros
