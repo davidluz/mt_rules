@@ -20,10 +20,10 @@
     <div class="row">
    <div class="form-home">
 <h2>Digite o nome do participante:</h2><br>
-<input type="text" name="fname">
+<input type="text" name="fname" id="nomeDoSujeito">
 
 <h2>Escolha o grupo:</h2><br>
-<select>
+<select id="grupo">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
@@ -70,7 +70,7 @@
       
       <div class="row">
         <div class="col-xs-4 col-xs-offset-11">
-          <h3>Pontos:0</h3>
+          <h3>Pontos: <span id="pontos">0</span></h3>
         </div>
       </div>
 

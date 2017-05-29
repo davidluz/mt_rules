@@ -3,23 +3,39 @@ var estimulos = [];
 var respostas = [];
 var contingency = [];
 var tentativas = 0;
+var grupo = 99;
+var fase = 1;
+var dados =[];
+var pontos = 0;
+var nomeDoSujeito = "sem nome";
 
 $(document).ready(function(){
 
 $("#iniciar-teste").click(function(){
 	$("#tela0").hide();
 	$("#tela3").show();
+tentativas = 1;
+grupo = parseInt($("#grupo").val());
+nomeDoSujeito = $("#nomeDoSujeito").val();
+console.log(grupo);
+console.log(nomeDoSujeito)
+
+
+
 });
 
-$("#comp1").click(function(){
+$("#comp1").click(function(e){
+  registraTentativa(e.target.id);
   tentativa();
 });
 
-$("#comp2").click(function(){
+$("#comp2").click(function(e){
+  registraTentativa(e.target.id);
   tentativa();
 });
 
-$("#comp3").click(function(){
+$("#comp3").click(function(e){
+  registraTentativa(e.target.id);
   tentativa();
 });
 
@@ -99,22 +115,30 @@ if(valor.cor==4){
 estimulos.forEach(agrupaFormas);
 estimulos.forEach(agrupaCores);
 
+var estimuloModelo;
+var estimuloComparacao1;
+var estimuloComparacao2;
+var estimuloComparacao3;
+
 function tentativa(){
+
+
+   $("#pontos").html(pontos);
     // Lembrar de manter a lógica da contingencia - ja vem dada no objeto  
     contingency = ContingencyGenerator('specificRange',19);
-    var estimuloModelo = estimulos[contingency[0]];
+     estimuloModelo = estimulos[contingency[0]];
     //Igual em forma e em cor, já garantido pelo gerador de contingências
-    var estimuloComparacao1 = estimulos[contingency[0]];
+     estimuloComparacao1 = estimulos[contingency[0]];
 
 
     //Igual e forma ou cor
-    var estimuloComparacao2 = estimulos[contingency[2]];
+     estimuloComparacao2 = estimulos[contingency[2]];
     var tempstring = eval('grupoFormas' + estimulos[contingency[0]].forma);
     var tempstring2 = eval('grupoCores' + estimulos[contingency[0]].cor);
     
 
     var tempRandom1 = Math.floor(Math.random() *2)+1;
-    console.log(tempRandom1);
+    
     //igual em forma
     if (tempRandom1==1){ 
     var rand = tempstring[Math.floor(Math.random() * eval(tempstring).length)];
@@ -122,7 +146,7 @@ function tentativa(){
     while(rand.id==estimulos[contingency[0]].id){
     rand = tempstring[Math.floor(Math.random() * eval(tempstring).length)];
     }
-    var estimuloComparacao2 = rand;
+     estimuloComparacao2 = rand;
     }
    
    
@@ -134,7 +158,7 @@ function tentativa(){
     while(rand.id==estimulos[contingency[0]].id){
     rand = tempstring[Math.floor(Math.random() * eval(tempstring).length)];
     }
-    var estimuloComparacao2 = rand;
+     estimuloComparacao2 = rand;
       
     }
 
@@ -142,7 +166,7 @@ function tentativa(){
 
   
     //Diferente em forma e cor
-     var estimuloComparacao3 = estimulos[contingency[3]];
+      estimuloComparacao3 = estimulos[contingency[3]];
    
     while (estimulos[contingency[0]].forma==estimuloComparacao3.forma||
            estimulos[contingency[0]].cor==estimuloComparacao3.cor)
@@ -150,7 +174,7 @@ function tentativa(){
         var lastTemp = Math.floor(Math.random() *18)+1;
         estimuloComparacao3 = estimulos[lastTemp];
         }
-        console.log(estimulos[contingency[0]].forma,estimulos[contingency[3]].forma);
+   
      
 
  
@@ -164,6 +188,33 @@ $("#comp3").attr('src', estimuloComparacao3.src);
 
 
 tentativa();
+
+
+/* Abaixo as regras dos diferentes arranjos a depender do grupo*/
+
+
+
+////*Grupo 1 regras*///
+if(grupo==1){
+
+
+
+}
+
+function registraTentativa(elementoClicadoID){
+dados.push(elementoClicadoID, 
+           estimuloModelo.cor,
+           estimuloModelo.forma,
+           estimuloComparacao1.cor,
+           estimuloComparacao1.forma,
+           estimuloComparacao2.cor,
+           estimuloComparacao2.forma,
+           estimuloComparacao3.cor,
+           estimuloComparacao3.forma,
+           fase);
+
+}
+
 
 
 });
