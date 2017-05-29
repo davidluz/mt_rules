@@ -8,6 +8,7 @@ var fase = 1;
 var dados =[];
 var pontos = 0;
 var nomeDoSujeito = "sem nome";
+var resposta = 'vazia';
 
 $(document).ready(function(){
 
@@ -17,10 +18,6 @@ $("#iniciar-teste").click(function(){
 tentativas = 1;
 grupo = parseInt($("#grupo").val());
 nomeDoSujeito = $("#nomeDoSujeito").val();
-console.log(grupo);
-console.log(nomeDoSujeito)
-
-
 
 });
 
@@ -121,7 +118,7 @@ var estimuloComparacao2;
 var estimuloComparacao3;
 
 function tentativa(){
-
+tentativas = tentativas+1;
 
    $("#pontos").html(pontos);
     // Lembrar de manter a lógica da contingencia - ja vem dada no objeto  
@@ -202,22 +199,93 @@ if(grupo==1){
 }
 
 function registraTentativa(elementoClicadoID){
-dados.push(elementoClicadoID, 
-           estimuloModelo.cor,
-           estimuloModelo.forma,
-           estimuloComparacao1.cor,
-           estimuloComparacao1.forma,
-           estimuloComparacao2.cor,
-           estimuloComparacao2.forma,
-           estimuloComparacao3.cor,
-           estimuloComparacao3.forma,
-           fase);
+dados.push({tentativas:tentativas,
+            fase:fase,
+            resposta,resposta});
 
 }
 
 
 
+
+$("#resultado").click(function(){
+
+
 });
+
+function salvarResultado(){
+  var tempName = "Resultado-" + nomeDoSujeito;
+  for(i=0; i<dados.length; i++){
+    console.log(i,dados.length);
+    var tentativas = dados[i].tentativas;
+    var fase = dados[i].fase;
+    var resposta = dados[i].resposta;
+    var modeloCor = dados[i].modeloCor;
+    var modeloForma = dados[i].modeloForma;
+    var comp1Forma = dados[i].comp1Forma;
+    var comp1Cor = dados[i].comp1Cor
+    var comp1Posicao = dados[i].comp1Posicao ;
+    $('.table2excel tbody').after('<tr><td>'+tentativas+'</td><td>'+fase+'</td><td>'+resposta+'</td></tr>');
+
+}
+console.log(dados[0]);
+  $(".table2excel").table2excel({
+         /*exclude: ".noExl",*/
+          name: "Excel Document Name",
+          filename: tempName,
+          fileext: ".xls",
+          exclude_img: true,
+          exclude_links: true,
+          exclude_inputs: true
+
+});
+
+}
+
+
+// defining flags
+var isCtrl = false;
+var isShift = false;
+// helpful function that outputs to the container
+function log(str) {
+  $("#container").html($("#container").html() + str + "");
+};
+// the magic :)
+$(document).ready(function() {
+ 
+  
+  // action on key up
+  $(document).keyup(function(e) {
+    if(e.which == 17) {
+      isCtrl = false;
+    }
+    if(e.which == 16) {
+      isShift = false;
+    }
+  });
+  // action on key down
+  $(document).keydown(function(e) {
+    if(e.which == 17) {
+      isCtrl = true; 
+    }
+    if(e.which == 16) {
+      isShift = true; 
+    }
+    if(e.which == 83 && isCtrl && isShift ) { 
+   salvarResultado();
+    } 
+  });
+  
+});
+
+
+
+
+
+});
+
+
+
 
 
 
