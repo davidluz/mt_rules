@@ -2,7 +2,7 @@
 var estimulos = [];
 var respostas = [];
 var contingency = [];
-var tentativas = 0;
+var tentativas = -1;
 var grupo = 99;
 var fase = 1;
 var dados =[];
@@ -12,28 +12,72 @@ var resposta = 'vazia';
 
 $(document).ready(function(){
 
+
+
 $("#iniciar-teste").click(function(){
 	$("#tela0").hide();
-	$("#tela3").show();
-tentativas = 1;
+	$("#tela1").show();
+tentativas = tentativas+1;
 grupo = parseInt($("#grupo").val());
 nomeDoSujeito = $("#nomeDoSujeito").val();
 
 });
 
+$("#tn-inicial-button").click(function(){
+  $("#tela1").hide();
+  $("#comp1").trigger( "click" );
+
+
+  if(grupo==1){
+  $("#ist-especifica").show();
+  }
+  if(grupo==2){
+  $("#tela-ist").show();
+  }
+  if(grupo==3){
+  $("#tela-ist").show();
+  }
+  if(grupo==4){
+  $("#tela-ist").show();
+  }
+  if(grupo==5){
+  $("#tela-ist").show();
+  }
+  if(grupo==6){
+  $("#tela-ist").show();
+  }
+  if(grupo==7){
+  $("#tela-ist").show();
+  }
+  if(grupo==8){
+  $("#tela-ist").show();
+  }
+  if(grupo==9){
+  $("#tela-ist").show();
+  }
+
+});
+
+$("#iniciar-geral-1").click(function(){
+$(".telas").hide();
+$("#tela3").show();
+});
+
+
+
 $("#comp1").click(function(e){
   registraTentativa(e.target.id);
-  tentativa();
+  tentativa(e);
 });
 
 $("#comp2").click(function(e){
   registraTentativa(e.target.id);
-  tentativa();
+  tentativa(e);
 });
 
 $("#comp3").click(function(e){
   registraTentativa(e.target.id);
-  tentativa();
+  tentativa(e);
 });
 
 
@@ -117,8 +161,24 @@ var estimuloComparacao1;
 var estimuloComparacao2;
 var estimuloComparacao3;
 
-function tentativa(){
+function tentativa(elementoClicado){
+  console.log("tentativa numero:", tentativas);
 tentativas = tentativas+1;
+if(tentativas>11){
+  fase=2;
+}
+/*Fase 1gyyyyyhp-0*/
+if(fase==1){
+
+if(elementoClicado.target.id=="comp2"){
+  acerto();
+}
+else{
+  erro();
+}
+
+
+}
 
    $("#pontos").html(pontos);
     // Lembrar de manter a lógica da contingencia - ja vem dada no objeto  
@@ -177,14 +237,43 @@ tentativas = tentativas+1;
  
    // Regras específicas software Mare - encapsular depoisss - muito importante para evitar trabalhos futuros
 
+
+var positions_temp = [1,2,3];
+shuffle(positions_temp);
+var randomComp1 = 'comp'+positions_temp[0];
+var randomComp2 = 'comp'+positions_temp[1];
+var randomComp3 = 'comp'+positions_temp[2];
+console.log(randomComp1,randomComp2,randomComp3);
+
+$("#img1").html('<img id="'+randomComp1+'" src="imgs/f1c1.jpg" class="comps" >');
+$("#img2").html('<img id="'+randomComp2+'" src="imgs/f1c1.jpg" class="comps" >');
+$("#img3").html('<img id="'+randomComp3+'" src="imgs/f1c1.jpg" class="comps" >');
+
+/*Repliquei o handler aqui - lembrar de arruamr depois, má pratica*/
+$("#comp1").click(function(e){
+  registraTentativa(e.target.id);
+  tentativa(e);
+});
+
+$("#comp2").click(function(e){
+  registraTentativa(e.target.id);
+  tentativa(e);
+});
+
+$("#comp3").click(function(e){
+  registraTentativa(e.target.id);
+  tentativa(e);
+});
+
+
 $("#model").attr('src', estimuloModelo.src);
 $("#comp1").attr('src', estimuloComparacao1.src);
 $("#comp2").attr('src', estimuloComparacao2.src);
 $("#comp3").attr('src', estimuloComparacao3.src);
+
 }
 
 
-tentativa();
 
 
 /* Abaixo as regras dos diferentes arranjos a depender do grupo*/
@@ -224,8 +313,9 @@ function salvarResultado(){
     var modeloForma = dados[i].modeloForma;
     var comp1Forma = dados[i].comp1Forma;
     var comp1Cor = dados[i].comp1Cor
-    var comp1Posicao = dados[i].comp1Posicao ;
-    $('.table2excel tbody').after('<tr><td>'+tentativas+'</td><td>'+fase+'</td><td>'+resposta+'</td></tr>');
+    var comp1Posicao = dados[i].comp1Posicao;
+    $('.table2excel tbody').after('<tr><td>'+tentativas+'</td><td>'+fase+'</td></tr>');
+
 
 }
 console.log(dados[0]);
@@ -279,7 +369,32 @@ $(document).ready(function() {
 });
 
 
+function acerto(){
+  if(tentativas>1){
+  pontos = pontos+1;
+  $('#acerto').show();
 
+  setTimeout(function(){
+    $('#acerto').hide();
+  }, 3000);
+
+  return ("ok");
+}
+
+}
+
+function erro(){
+   if(tentativas>1){
+    $('#erro').show();
+
+  setTimeout(function(){
+    $('#erro').hide();
+  }, 3000);
+
+  return ("ok");
+ 
+}
+}
 
 
 });

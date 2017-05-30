@@ -14,3 +14,39 @@
 	margin-top: 100px;
 	margin-left: 500px;
 }
+
+.instruction{
+	background-color: #eeeeee !important;
+	width: 100% !important;
+	min-height: 400px;
+	position: absolute;
+	
+}
+
+.texto h1{
+	width: 800px;
+	margin-top: 100px;
+	font-size: 40px;
+}
+
+
+
+.ist2 h2{
+	max-width: 800px;
+
+}
+
+.table2excel{
+	display: none;
+}
+
+#resultado{
+	display: none;
+}
+.alert{
+	display: none;
+}
+
+.comps{
+	cursor: pointer;
+}

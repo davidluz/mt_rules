@@ -14,6 +14,10 @@
 
 <body cz-shortcut-listen="true">
 
+
+
+
+
 <div id="tela0">
   <div class="jumbotron">
       <div class="container">
@@ -39,19 +43,42 @@
 	</div></div></div></div>
 </div>
 
-    <div id="tela1" class="telas">
-    <div class="jumbotron">
-      <div class="container">
 
+     <div id="tela1" class="telas">
+  
+  
+       <br><br><br>
+        <center><div class="instruction">
+        <div class="texto">
         <h1>Você vai realizar uma atividade em que poderá ganhar ponto a depender do seu desempenho.</h1>
-
-        <div class="row spacer">
         </div>
 
-        <p><a class="btn btn-primary btn-lg" role="button">Prosseguir »</a></p>
-      </div>
+        <br><br>
+
+        <p><a class="btn btn-primary btn-lg" id="tn-inicial-button">Prosseguir »</a></p>
+        </div></center>
+   
     </div>
-    </div>
+   
+   <div id="ist-especifica" class="telas">
+
+     <br><br><br>
+        <center><div class="instruction ist2">
+        <div class="texto">
+        <h1>Instruções</h1>
+        <h2>Na tela, aparecerão quatro figuras, uma em cima e três embaixo. Das figuras de baixo, escolha a mais parecida em forma ou em cor (mas não em ambas as características ao mesmo tempo) com a figura de cima. Para concretizar sua escolha, você deve pressionar o botão esquerdo do "mouse" sobre a imagem que você considerar mais conveniente.</h2>
+        </div>
+
+        <br><br>
+
+        <p><a class="btn btn-primary btn-lg" id="iniciar-geral-1">Iniciar</a></p>
+        </div></center>
+     
+
+   </div>
+
+     
+
 
     <div id="tela2" class="telas">
     	<div class="container">
@@ -77,13 +104,13 @@
 
       <div class="row">
         <div class="col-xs-4 col-xs-offset-4">
-          <img id="model" src="imgs/f4c4.jpg" class="img-responsive" alt="Responsive image"> 
+          <img id="model" src="imgs/f1c1.jpg" class="img-responsive" alt="Responsive image"> 
         </div>
       </div>
 
-      <div  id="acerto" class="alert alert-success hidden" role="alert">Você acertou a resposta.</div>
+      <div  id="acerto" class="alert alert-success" role="alert">Você acertou a resposta.</div>
       
-      <div  id="erro" class="alert alert-danger hidden" role="alert">Você não acertou a resposta. </div>
+      <div  id="erro" class="alert alert-danger" role="alert">Você não acertou a resposta. </div>
 
 
       <div class="row spacer">
@@ -91,14 +118,14 @@
 
       <!-- id # foi gambi para fazer figura ficar clickavel-->
       <div class="row">
-        <div class="col-xs-4">
-          <a href="#"> <img id="comp1" src="imgs/f4c4.jpg"  class="img-responsive"> </a>
+        <div class="col-xs-4" id="img1">
+           <img id="comp1" src="imgs/f1c1.jpg" class="comps"  > 
         </div>
-        <div class="col-xs-4">
-          <a href="#"> <img id="comp2" src="imgs/f3c3.jpg"  class="img-responsive"> </a>
+        <div class="col-xs-4" id="img2">
+         <img id="comp2" src="imgs/f1c1.jpg" class="comps"  > 
         </div>
-        <div class="col-xs-4">
-          <a href="#"> <img id="comp3" src="imgs/f3c4.jpg"  class="img-responsive"> </a>
+        <div class="col-xs-4" id="img3">
+          <img id="comp3" src="imgs/f1c1.jpg" class="comps"  > 
         </div>
       </div>
 
