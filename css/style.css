@@ -2,7 +2,9 @@
 	display: none;
 }
 
-
+.container{
+	margin-top: -10px;
+}
 
 .jumbotron{
 	background-color: #fff;
@@ -29,6 +31,11 @@
 	font-size: 40px;
 }
 
+.img-responsive{
+	min-width: 200px;
+	max-width: 200px;
+	margin-left: 80px;
+}
 
 
 .ist2 h2{
@@ -50,3 +57,5 @@
 .comps{
 	cursor: pointer;
 }
+
+

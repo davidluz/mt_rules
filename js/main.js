@@ -5,6 +5,7 @@ var contingency = [];
 var tentativas = -1;
 var grupo = 99;
 var fase = 1;
+var bloco = 1;
 var dados =[];
 var pontos = 0;
 var nomeDoSujeito = "sem nome";
@@ -29,31 +30,63 @@ $("#tn-inicial-button").click(function(){
 
 
   if(grupo==1){
-  $("#ist-especifica").show();
+  $("#tela-1").show();
+  $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+  Das figuras de baixo, escolha a mais parecida em forma ou em cor
+ (mas não em ambas as características ao mesmo tempo) com a figura de cima. Para concretizar sua escolha,
+ você deve pressionar o botão esquerdo do "mouse" sobre a imagem que você considerar mais conveniente.`); 
+
   }
   if(grupo==2){
-  $("#tela-ist").show();
+ $("#tela-1").show();
+    $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+  Das figuras de baixo, escolha a mais parecida em forma ou em cor
+ (mas não em ambas as características ao mesmo tempo) com a figura de cima. Para concretizar sua escolha,
+ você deve pressionar o botão esquerdo do "mouse" sobre a imagem que você considerar mais conveniente.`); 
+
   }
   if(grupo==3){
-  $("#tela-ist").show();
+   $("#tela-1").show();
+     $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+  Das figuras de baixo, escolha a mais parecida em forma ou em cor
+ (mas não em ambas as características ao mesmo tempo) com a figura de cima. Para concretizar sua escolha,
+ você deve pressionar o botão esquerdo do "mouse" sobre a imagem que você considerar mais conveniente.`); 
   }
   if(grupo==4){
-  $("#tela-ist").show();
+  $("#tela-1").show();
+     $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+      Das figuras de baixo, escolha aquela que considera que tenha alguma relação com a figura de cima.
+       Para concretizar sua escolha, você deve pressionar o botão esquerdo do "mouse" sobre a imagem 
+       que você considerar mais conveniente.`); 
   }
   if(grupo==5){
-  $("#tela-ist").show();
+  $("#tela-1").show();
+    $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+      Das figuras de baixo, escolha aquela que considera que tenha alguma relação com a figura de cima.
+       Para concretizar sua escolha, você deve pressionar o botão esquerdo do "mouse" sobre a imagem 
+       que você considerar mais conveniente.`); 
   }
   if(grupo==6){
-  $("#tela-ist").show();
+  $("#tela-1").show();
+    $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+      Das figuras de baixo, escolha aquela que considera que tenha alguma relação com a figura de cima.
+       Para concretizar sua escolha, você deve pressionar o botão esquerdo do "mouse" sobre a imagem 
+       que você considerar mais conveniente.`); 
   }
   if(grupo==7){
-  $("#tela-ist").show();
+   $("#tela-1").show();
+    $("#texto-da-instrucao").html(`Na tela, aparecerão quatro figuras, uma em cima e três embaixo. 
+      Das figuras de baixo, escolha aquela que considera que tenha alguma relação com a figura de cima.
+       Para concretizar sua escolha, você deve pressionar o botão esquerdo do "mouse" sobre a imagem 
+       que você considerar mais conveniente.`); 
   }
   if(grupo==8){
-  $("#tela-ist").show();
+   $("#tela-1").show();
+    $("#texto-da-instrucao").html(`Para resolver a tarefa utilize o mouse.`); 
   }
   if(grupo==9){
-  $("#tela-ist").show();
+   $("#tela-1").show();
+   $("#texto-da-instrucao").html(`Para resolver a tarefa utilize o mouse.`); 
   }
 
 });
@@ -162,23 +195,29 @@ var estimuloComparacao2;
 var estimuloComparacao3;
 
 function tentativa(elementoClicado){
+
+
+
+
   console.log("tentativa numero:", tentativas);
 tentativas = tentativas+1;
-if(tentativas>11){
-  fase=2;
-}
-/*Fase 1gyyyyyhp-0*/
-if(fase==1){
 
+/*Fase 1gyyyyyhp-0*/
+if(bloco==1){
 if(elementoClicado.target.id=="comp2"){
   acerto();
 }
 else{
   erro();
 }
-
-
 }
+
+if(tentativas==37){
+  bloco=2;
+  $("#tela3").hide();
+  $("#tela1").show();
+}
+
 
    $("#pontos").html(pontos);
     // Lembrar de manter a lógica da contingencia - ja vem dada no objeto  
@@ -245,11 +284,18 @@ var randomComp2 = 'comp'+positions_temp[1];
 var randomComp3 = 'comp'+positions_temp[2];
 console.log(randomComp1,randomComp2,randomComp3);
 
-$("#img1").html('<img id="'+randomComp1+'" src="imgs/f1c1.jpg" class="comps" >');
-$("#img2").html('<img id="'+randomComp2+'" src="imgs/f1c1.jpg" class="comps" >');
-$("#img3").html('<img id="'+randomComp3+'" src="imgs/f1c1.jpg" class="comps" >');
+$("#img1").html('<img id="'+randomComp1+'" src="imgs/f1c1.jpg" class="comps img-responsive" >');
+$("#img2").html('<img id="'+randomComp2+'" src="imgs/f1c1.jpg" class="comps img-responsive" >');
+$("#img3").html('<img id="'+randomComp3+'" src="imgs/f1c1.jpg" class="comps img-responsive" >');
 
 /*Repliquei o handler aqui - lembrar de arruamr depois, má pratica*/
+
+
+
+
+
+$(".comps").off('click');
+setTimeout(function(){
 $("#comp1").click(function(e){
   registraTentativa(e.target.id);
   tentativa(e);
@@ -264,6 +310,7 @@ $("#comp3").click(function(e){
   registraTentativa(e.target.id);
   tentativa(e);
 });
+}, 2000);
 
 
 $("#model").attr('src', estimuloModelo.src);
@@ -288,9 +335,13 @@ if(grupo==1){
 }
 
 function registraTentativa(elementoClicadoID){
+  var modeloCor = $("#comp2").attr('src');
+  var modeloCorFinal = parseInt(modeloCor.substring(8, 9));
+  console.log('cor:', modeloCorFinal);
 dados.push({tentativas:tentativas,
-            fase:fase,
-            resposta,resposta});
+            bloco:bloco,
+            resposta:resposta,
+            modeloCor:modeloCorFinal});
 
 }
 
@@ -307,14 +358,14 @@ function salvarResultado(){
   for(i=0; i<dados.length; i++){
     console.log(i,dados.length);
     var tentativas = dados[i].tentativas;
-    var fase = dados[i].fase;
+    var bloco = dados[i].bloco;
     var resposta = dados[i].resposta;
     var modeloCor = dados[i].modeloCor;
     var modeloForma = dados[i].modeloForma;
     var comp1Forma = dados[i].comp1Forma;
     var comp1Cor = dados[i].comp1Cor
     var comp1Posicao = dados[i].comp1Posicao;
-    $('.table2excel tbody').after('<tr><td>'+tentativas+'</td><td>'+fase+'</td></tr>');
+    $('.table2excel tbody').after('<tr><td>'+tentativas+'</td><td>'+bloco+'</td><td>'+resposta+'</td><td>'+modeloCor+'</td></tr>');
 
 
 }
@@ -376,7 +427,7 @@ function acerto(){
 
   setTimeout(function(){
     $('#acerto').hide();
-  }, 3000);
+  }, 2000);
 
   return ("ok");
 }
@@ -389,7 +440,7 @@ function erro(){
 
   setTimeout(function(){
     $('#erro').hide();
-  }, 3000);
+  }, 2000);
 
   return ("ok");
  
